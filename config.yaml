@@ -1,0 +1,32 @@
+universe:
+  configs:
+    start_datetime: "2021-01-01"
+    end_datetime: "20201-11-15"
+    interval: 1min
+    datetime_format: date
+    instrument_list:
+      - BTC-USDT
+      - ETH-USDT
+      - ADA-USDT
+  universe_names:
+    kucoin_kline:
+      data_source_type: parquet
+      data_source_url: data/parquet
+    
+
+backtest:
+  database_url: data/backtest/backtest.csv
+  tearsheet_directory: data/backtest/tearsheets
+  mode: full
+  periods_per_year: 365
+  risk_free_rate: 0.0
+  compounded: true
+  strategy:
+    SimpleMovingAverageStrategy:
+      name: SMA-10-100
+      preprocessor: KucoinPreprocessor
+      postprocessor: KucoinPostprocessor
+      sma_short_duration: 10
+      sma_long_duration: 100
+      
+    
