@@ -1,0 +1,5 @@
+uri:
+  rest: https://api.kucoin.com
+  ws: wss://push1-v2.kucoin.com/endpoint
+symbols:
+  - BTC-USDT
