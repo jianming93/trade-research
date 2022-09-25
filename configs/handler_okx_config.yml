@@ -1,0 +1,6 @@
+url:
+  rest: https://www.okx.com/
+  ws: wss://ws.okx.com:8443/ws/v5/public
+symbols:
+  - BTC-USDT
+  - ETH-USDT

@@ -1,0 +1,6 @@
+url:
+  rest: https://api.kucoin.com
+  ws: wss://ws-api.kucoin.com/endpoint
+token_path: /api/v1/bullet-public
+symbols:
+  - BTC-USDT

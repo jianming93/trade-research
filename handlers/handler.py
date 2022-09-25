@@ -1,10 +1,9 @@
 import abc
 import yaml
+import json
 import logging
 
-import websockets
-
-class Connector(abc.ABC):
+class Handler(abc.ABC):
     def __init__(self, config_file, token=None):
         self.config_file = config_file
         self.token = None
@@ -18,21 +17,18 @@ class Connector(abc.ABC):
             except yaml.YAMLError as exc:
                 logging.error(exc)
 
-    def connect(self):
-        ws_uri = self.pre_connect_setup()
-        try:
-            self.websocket = websockets.connect(ws_uri)
-        except Exception as err:
-            logging.error(err)
+    def _dump_json(self, message):
+        return json.dumps(message)
 
-
-    def subscribe(self):
-        subscribe_messages = self.pre_subscribe_setup()
-        for subscribe_message in subscribe_messages:
-            self.websocket.send(subscribe_message)
+    def _load_json(self, message):
+        return json.loads(message)
 
     @abc.abstractmethod
-    def pre_connect_setup(self):
+    def on_message(self, message):
+        pass
+
+    @abc.abstractmethod
+    def pre_connection_setup(self):
         pass
 
     @abc.abstractmethod
